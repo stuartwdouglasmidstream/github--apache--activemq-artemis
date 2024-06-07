@@ -1199,18 +1199,6 @@
          <build>
             <plugins>
                <plugin>
-                  <groupId>org.apache.rat</groupId>
-                  <artifactId>apache-rat-plugin</artifactId>
-                  <executions>
-                     <execution>
-                        <phase>compile</phase>
-                        <goals>
-                           <goal>check</goal>
-                        </goals>
-                     </execution>
-                  </executions>
-               </plugin>
-               <plugin>
                   <groupId>org.apache.maven.plugins</groupId>
                   <artifactId>maven-checkstyle-plugin</artifactId>
                   <executions>
@@ -1222,6 +1210,7 @@
                      </execution>
                   </executions>
                </plugin>
+               
             </plugins>
          </build>
       </profile>
@@ -1253,18 +1242,6 @@
                   </executions>
                </plugin>
                <plugin>
-                  <groupId>org.apache.rat</groupId>
-                  <artifactId>apache-rat-plugin</artifactId>
-                  <executions>
-                     <execution>
-                        <phase>compile</phase>
-                        <goals>
-                           <goal>check</goal>
-                        </goals>
-                     </execution>
-                  </executions>
-               </plugin>
-               <plugin>
                   <groupId>org.apache.maven.plugins</groupId>
                   <artifactId>maven-checkstyle-plugin</artifactId>
                   <executions>
@@ -1276,6 +1253,7 @@
                      </execution>
                   </executions>
                </plugin>
+               
             </plugins>
          </build>
       </profile>
@@ -1731,84 +1709,11 @@
                </configuration>
             </plugin>
             <plugin>
-               <groupId>org.apache.rat</groupId>
-               <artifactId>apache-rat-plugin</artifactId>
-               <configuration>
-                  <reportFile>${activemq.basedir}/ratReport.txt</reportFile>
-                  <excludes>
-                     <exclude>**/src/main/webapp/hawtconfig.json</exclude>
-                     <exclude>.repository/**</exclude>
-                     <exclude>.travis.yml</exclude>
-                     <exclude>.github/workflows/*</exclude>
-                     <exclude>**/footer.html</exclude>
-                     <exclude>**/*.txt</exclude>
-                     <exclude>**/*.md</exclude>
-                     <exclude>etc/ide-settings/**</exclude>
-                     <exclude>**/*.json</exclude>
-                     <exclude>docs/**/*.json</exclude>
-                     <exclude>docs/**/_book/</exclude>
-                     <exclude>docs/**/_layouts/</exclude>
-                     <exclude>docs/user-manual/en/diagrams/*.svg</exclude>
-                     <exclude>**/target/</exclude>
-                     <exclude>**/META-INF/services/*</exclude>
-                     <exclude>**/META-INF/MANIFEST.MF</exclude>
-                     <exclude>**/*.iml</exclude>
-                     <exclude>**/*.jceks</exclude>
-                     <exclude>**/*.jks</exclude>
-                     <exclude>**/*.p12</exclude>
-                     <exclude>**/xml.xsd</exclude>
-                     <exclude>**/org/apache/activemq/artemis/utils/json/**</exclude>
-                     <exclude>**/org/apache/activemq/artemis/utils/Base64.java</exclude>
-                     <exclude>**/.settings/**</exclude>
-                     <exclude>**/.project</exclude>
-                     <exclude>**/.classpath</exclude>
-                     <exclude>**/.editorconfig</exclude>
-                     <exclude>**/.checkstyle</exclude>
-                     <exclude>**/.factorypath</exclude>
-                     <exclude>**/org.apache.activemq.artemis.cfg</exclude>
-                     <exclude>**/nb-configuration.xml</exclude>
-                     <exclude>**/nbactions-tests.xml</exclude>
-                     <exclude>**/.vscode/settings.json</exclude>
-                     <!-- activemq5 unit tests exclude -->
-                     <exclude>**/*.data</exclude>
-                     <exclude>**/*.bin</exclude>
-                     <exclude>**/src/test/resources/keystore</exclude>
-                     <exclude>**/src/test/java/org/apache/activemq/security/*.ts</exclude>
-                     <exclude>**/*.log</exclude>
-                     <exclude>**/*.redo</exclude>
-
-                      <!-- NPM files -->
-                     <exclude>**/node/**</exclude>
-                     <exclude>**/node_modules/**</exclude>
-                     <exclude>**/package.json</exclude>
-                     <exclude>**/package-lock.json</exclude>
-
-                     <!-- Build time overlay folder -->
-                     <exclude>**/overlays/**</exclude>
-
-                     <!-- things from cmake on the native build -->
-                     <exclude>**/CMakeFiles/</exclude>
-                     <exclude>**/Makefile</exclude>
-                     <exclude>**/cmake_install.cmake</exclude>
-                     <exclude>activemq-artemis-native/src/main/c/org_apache_activemq_artemis_jlibaio_LibaioContext.h</exclude>
-                     <exclude>**/dependency-reduced-pom.xml</exclude>
-
-                     <!-- Mockito -->
-                     <exclude>**/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker</exclude>
-
-                     <!-- .NET Examples-->
-                     <exclude>examples/protocols/amqp/dotnet/**/obj/**/*</exclude>
-                     <exclude>examples/protocols/amqp/dotnet/**/bin/**/*</exclude>
-                     <exclude>examples/protocols/amqp/dotnet/**/readme.md</exclude>
-                     <exclude>examples/protocols/amqp/**/readme.md</exclude>
-                  </excludes>
-               </configuration>
-            </plugin>
-            <plugin>
                <groupId>org.codehaus.mojo</groupId>
                <artifactId>exec-maven-plugin</artifactId>
                <version>${exec-maven-plugin.version}</version>
             </plugin>
+            
          </plugins>
       </pluginManagement>
 
@@ -1870,18 +1775,6 @@
             <version>2.2</version>
          </plugin>
          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>findbugs-maven-plugin</artifactId>
-            <version>2.5.2</version>
-            <configuration>
-               <excludeFilterFile>${user.dir}/etc/findbugs-exclude.xml</excludeFilterFile>
-               <findbugsXmlOutput>true</findbugsXmlOutput>
-               <xmlOutput>true</xmlOutput>
-               <effort>Max</effort>
-               <failOnError>false</failOnError>
-            </configuration>
-         </plugin>
-         <plugin>
             <groupId>org.apache.felix</groupId>
             <artifactId>maven-bundle-plugin</artifactId>
             <version>${maven.bundle.plugin.version}</version>
@@ -1891,50 +1784,52 @@
             <groupId>org.owasp</groupId>
             <artifactId>dependency-check-maven</artifactId>
             <version>${owasp.version}</version>
+            <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
             <configuration>
-                <skip>${skipOWASP}</skip>
+          <skip>${skipOWASP}</skip>
+        </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <configuration>
+                <artifactItems>
+            <artifactItem>
+              <groupId>org.apache.activemq</groupId>
+              <artifactId>activemq-artemis-native</artifactId>
+              <version>${activemq-artemis-native-version}</version>
+              <type>jar</type>
+              <overWrite>false</overWrite>
+              <outputDirectory>${project.build.directory}/bin</outputDirectory>
+              <includes>**/*.so</includes>
+            </artifactItem>
+          </artifactItems>
+                
                 <!-- <skipProvidedScope>true</skipProvidedScope>
                 <skipRuntimeScope>true</skipRuntimeScope> -->
             </configuration>
             <executions>
                <execution>
                   <goals>
-                     <goal>check</goal>
+                     <goal>unpack</goal>
                   </goals>
+                  <id>copy</id>
+                  <phase>generate-sources</phase>
                </execution>
             </executions>
+            <inherited>false</inherited>
          </plugin>
 
          <!-- This is placing the .so in the root target/bin/ dir, so the testsuite can use it, by
               leveraging the surefire argLine. This avoids having to build a distribution to run tests.
               Note the plugin config is not inherited, we only do this at the root. -->
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <inherited>false</inherited>
-            <executions>
-               <execution>
-                  <id>copy</id>
-                  <phase>generate-sources</phase>
-                  <goals>
-                     <goal>unpack</goal>
-                  </goals>
-               </execution>
-            </executions>
-            <configuration>
-               <artifactItems>
-                  <artifactItem>
-                     <groupId>org.apache.activemq</groupId>
-                     <artifactId>activemq-artemis-native</artifactId>
-                     <version>${activemq-artemis-native-version}</version>
-                     <type>jar</type>
-                     <overWrite>false</overWrite>
-                     <outputDirectory>${project.build.directory}/bin</outputDirectory>
-                     <includes>**/*.so</includes>
-                  </artifactItem>
-               </artifactItems>
-            </configuration>
-         </plugin>
+         
       </plugins>
    </build>
 
